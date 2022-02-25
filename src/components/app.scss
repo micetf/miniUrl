@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/bootstrap";
+body {
+    margin-top: 70px;
+}
+
+.vh-restant {
+      height: calc(75vh - 70px)
+}
