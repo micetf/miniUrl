@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import { YOURLS_ROOT, YOURLS_API, YOURLS_SIGNATURE } from "./config.js";
 import modal from "bootstrap/js/dist/modal";
+import Svg, { COPY } from "../Svg/index.js";
 
 function verifierURL(url) {
     const res = url.match(
@@ -29,6 +30,10 @@ function Tool() {
                         format: "json",
                         url: lien,
                         keyword: texte,
+                    },
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
                     },
                 })
                 .then(function (response) {
@@ -58,7 +63,6 @@ function Tool() {
     }
     function closeModal() {
         setLienRaccourci("");
-        new modal(modalRef.current).hide();
     }
 
     return (
@@ -101,21 +105,36 @@ function Tool() {
                         </button>
                     </div>
                 </div>
-                <div ref={modalRef} className="modal fade" tabIndex="-1">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h3 className="modal-title">Lien raccourci</h3>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                    onClick={closeModal}
-                                ></button>
-                            </div>
-                            <div className="modal-body">
-                                <p>{lienRaccourci}</p>
+            </div>
+            <div
+                ref={modalRef}
+                className="modal fade"
+                data-bs-backdrop="static"
+                tabIndex="-1"
+            >
+                <div className="modal-dialog  modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h3 className="modal-title">Lien raccourci</h3>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                onClick={closeModal}
+                            ></button>
+                        </div>
+                        <div className="modal-body d-flex">
+                            <div className="p-2">{lienRaccourci}</div>
+                            <div
+                                className="p-2 btn btn-primary ms-auto"
+                                onClick={() =>
+                                    navigator.clipboard
+                                        .writeText(lienRaccourci)
+                                        .then(() => {})
+                                }
+                            >
+                                <Svg src={COPY} />
                             </div>
                         </div>
                     </div>
