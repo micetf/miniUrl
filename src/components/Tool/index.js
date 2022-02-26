@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRef, useState } from "react";
-import { YOURLS_API, YOURLS_SIGNATURE } from "./config.js";
+import { YOURLS_ROOT, YOURLS_API, YOURLS_SIGNATURE } from "./config.js";
 import modal from "bootstrap/js/dist/modal";
 
 function verifierURL(url) {
@@ -82,9 +82,7 @@ function Tool() {
                         />
                     </div>
                     <div className="input-group">
-                        <span className="input-group-text">
-                            https://micetf.fr/urls/
-                        </span>
+                        <span className="input-group-text">{YOURLS_ROOT}</span>
                         <input
                             type="text"
                             className="form-control  form-control-lg"
@@ -103,22 +101,22 @@ function Tool() {
                         </button>
                     </div>
                 </div>
-            </div>
-            <div ref={modalRef} className="modal fade" tabIndex="-1">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h3 className="modal-title">Lien raccourci</h3>
-                            <button
-                                type="button"
-                                className="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                                onClick={closeModal}
-                            ></button>
-                        </div>
-                        <div className="modal-body">
-                            <p>{lienRaccourci}</p>
+                <div ref={modalRef} className="modal fade" tabIndex="-1">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h3 className="modal-title">Lien raccourci</h3>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                    onClick={closeModal}
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                <p>{lienRaccourci}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
